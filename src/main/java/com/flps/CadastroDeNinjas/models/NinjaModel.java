@@ -1,11 +1,11 @@
 package com.flps.CadastroDeNinjas.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
 
 @Entity
 @Table(name = "tb_ninjas")
@@ -22,8 +22,11 @@ public class NinjaModel {
 
     @ManyToOne
     @JoinColumn(name = "missoes_id")
+    @JsonIgnore
     private MissoesModel missoes;
 
-
-
+    @JsonProperty("missoes_id")
+    public Long getMissoesId() {
+        return missoes != null ? missoes.getId() : null;
+    }
 }
